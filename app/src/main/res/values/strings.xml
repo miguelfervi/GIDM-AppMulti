@@ -6,4 +6,12 @@
 
     <string name="action_settings">Settings</string>
     <string name="Sensors">Sensores</string>
+
+    <string name="onStart"> Actividad iniciada </string>
+    <string name="onRestart"> Actividad reiniciada</string>
+    <string name="onResume"> Actividad lista</string>
+    <string name="onPause"> Actividad pausada</string>
+    <string name="onStop"> Actividad detenida</string>
+    <string name="onDestroy"> Actividad destruida </string>
+
 </resources>

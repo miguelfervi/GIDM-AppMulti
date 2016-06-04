@@ -1,6 +1,8 @@
 package gidm.es.appmulti;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,9 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final boolean muestra_estados = false;
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -36,15 +44,40 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Obtenemos una referencia a los controles de la interfaz
-        final Button boton = (Button)findViewById(R.id.button_sensores);
+        final Button boton_sensores = (Button)findViewById(R.id.button_sensores);
         //Implementamos el evento “click” del botón
-        boton.setOnClickListener(new View.OnClickListener() {
+        boton_sensores .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =  new Intent(MainActivity.this, SensoresActivity.class);
                 startActivity(intent);
             }
         });
+
+        final Button boton_estados = (Button)findViewById(R.id.button_estados);
+        boton_estados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                boolean muestra_estado;
+                SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                muestra_estado = prefs.getBoolean("muestra_estados", true);
+
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                if(muestra_estado==false){
+                    editor.putBoolean("muestra_estados", true);
+                    Toast.makeText(MainActivity.this,"Estados visibles",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    editor.putBoolean("muestra_estados", false);
+                    Toast.makeText(MainActivity.this,"Estados ocultos",Toast.LENGTH_LONG).show();
+                }
+
+                editor.commit();
+
+            }
+        });
+
 
     }
 

@@ -2,6 +2,8 @@ package gidm.es.appmulti;
 
 
 import android.app.Service;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
 /**
  * Created by JCristobal on 04/06/2016.
  */
@@ -48,5 +52,82 @@ public class SensoresActivity extends AppCompatActivity {
 
     }
 
-    
+    // Funciones para controlar el estado de la aplicación
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        boolean muestra_estado;
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        muestra_estado = prefs.getBoolean("muestra_estados", true);
+
+        if(muestra_estado) {
+            Log.i(TAG, (String) getText(R.string.onStart));
+            Toast.makeText(this, R.string.onStart, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        boolean muestra_estado;
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        muestra_estado = prefs.getBoolean("muestra_estados", true);
+
+        if(muestra_estado) {
+            Log.i(TAG, (String) getText(R.string.onRestart));
+            Toast.makeText(this, R.string.onRestart, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        boolean muestra_estado;
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        muestra_estado = prefs.getBoolean("muestra_estados", true);
+
+        if(muestra_estado) {
+            Log.i(TAG, (String) getText(R.string.onResume));
+            Toast.makeText(this, R.string.onResume, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        boolean muestra_estado;
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        muestra_estado = prefs.getBoolean("muestra_estados", true);
+
+        if(muestra_estado) {
+            Log.i(TAG, (String) getText(R.string.onPause));
+            Toast.makeText(this, R.string.onPause, Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        boolean muestra_estado;
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        muestra_estado = prefs.getBoolean("muestra_estados", true);
+
+        if(muestra_estado) {
+            Log.i(TAG, (String) getText(R.string.onStop));
+            Toast.makeText(this, R.string.onStop, Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        boolean muestra_estado;
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        muestra_estado = prefs.getBoolean("muestra_estados", true);
+
+        if(muestra_estado) {
+            Log.i(TAG, (String) getText(R.string.onDestroy));
+            Toast.makeText(this, R.string.onDestroy, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
