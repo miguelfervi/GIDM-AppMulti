@@ -5,6 +5,18 @@
         <item
             android:id="@+id/op_sensor"
             android:title="@string/Sensors" />
+        <item
+            android:id="@+id/op_login"
+            android:title="@string/Login" />
+        <item
+            android:id="@+id/op_alarma"
+            android:title="@string/Alarmas" />
+        <item
+            android:id="@+id/op_noticias"
+            android:title="@string/Noticias" />
+        <item
+            android:id="@+id/op_control"
+            android:title="@string/Control_aplicaciones" />
 
     </group>
 
