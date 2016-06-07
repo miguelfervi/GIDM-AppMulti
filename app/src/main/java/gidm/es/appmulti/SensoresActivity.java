@@ -1,13 +1,15 @@
 package gidm.es.appmulti;
 
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -20,12 +22,13 @@ import java.util.Map;
 
 
 /**
- * Created by JCristobal on 04/06/2016.
+ * Created by JCristobal and Miguel on 04/06/2016.
  */
 
-public class SensoresActivity extends AppCompatActivity {
-    static String TAG = "Sensores";
+public class SensoresActivity extends FragmentActivity implements SensoresFragment.LisSelectionListener {
+    private static final String TAG = "Sensores";
     SensorManager sensorManager;
+    private SensoresFragment vSensoresFragment;
 
 
     @Override
@@ -49,6 +52,7 @@ public class SensoresActivity extends AppCompatActivity {
         ListView lv = (ListView) findViewById(R.id.sensorList);
         lv.setAdapter(sa);
 
+        vSensoresFragment = (SensoresFragment) getSupportFragmentManager().findFragmentById(R.id.sensores);
 
     }
 

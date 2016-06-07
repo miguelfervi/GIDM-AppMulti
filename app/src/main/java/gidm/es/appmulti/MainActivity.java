@@ -1,5 +1,6 @@
 package gidm.es.appmulti;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity
     public static final String MyPREFERENCES = "MyPrefs" ;
     public static final boolean muestra_estados = false;
     SharedPreferences sharedpreferences;
+    DrawerLayout drawerLayout;
+    NavigationView navView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,30 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+         drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
+
+        navView = (NavigationView)findViewById(R.id.nav_view);
+
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+
+                boolean fragmentTransaction = false;
+                SensoresFragment fragment = null;
+
+                switch (item.getItemId()){
+                    case R.id.sensores:
+                        fragment= new SensoresFragment();
+                        fragmentTransaction = true;
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+
 
     }
 
@@ -104,6 +131,12 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
